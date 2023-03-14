@@ -1,0 +1,35 @@
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const sb = createClient(supabaseUrl, supabaseAnonKey);
+
+export const db = {
+    Auth: {
+        async signInWithEmailAndPassword(email: string, password: string) {
+            const { data, error } = await sb.auth.signInWithPassword({
+                email,
+                password
+            });
+
+            if (error || !data?.user) {
+                return { user: null, session: null };
+            }
+
+            return data;
+        },
+        async getUser() {
+            const user = await sb.auth.getUser();
+
+            return user;
+        },
+        async signOut() {
+            const { error } = await sb.auth.signOut()
+
+            if (error) {
+                throw error;
+            }
+        }
+    }
+};
