@@ -7,3 +7,34 @@
 // our project needs Classic Solid, Brands, and Sharp Solid
 @import "./fontawesome/scss/solid.scss";
 @import "./fontawesome/scss/brands.scss";
+
+// Loader
+.main-loader {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .app-loader {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+        position: relative;
+        color: #000;
+        border: 3px solid;
+        box-sizing: border-box;
+        animation: fill 1.5s linear infinite alternate;
+    }
+    @keyframes fill {
+        0% {
+            box-shadow: 0 0 inset;
+        }
+        100% {
+            box-shadow: 0 -48px inset;
+        }
+    }
+}
